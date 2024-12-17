@@ -17,11 +17,9 @@ export default class Pricing {
     this._amount = value;
   }
 
-
   get currency() {
     return this._currency;
   }
-
 
   set currency(value) {
     if (!(value instanceof Currency)) {
