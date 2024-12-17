@@ -1,20 +1,11 @@
-class HolbertonCourse {
+export default class HolbertonCourse {
   constructor(name, length, students) {
-    if (typeof name !== 'string') {
-      throw new TypeError('Name must be a string');
-    }
-    if (typeof length !== 'number') {
-      throw new TypeError('Length must be a number');
-    }
-    if (!Array.isArray(students)) {
-      throw new TypeError('Students must be an array of strings');
-    }
-
-    this._name = name;
-    this._length = length;
-    this._students = students;
+    this.name = name;
+    this.length = length;
+    this.students = students;
   }
 
+  /* Getters */
   get name() {
     return this._name;
   }
@@ -24,45 +15,27 @@ class HolbertonCourse {
   }
 
   get students() {
-    return [...this._students];
+    return this._students;
   }
 
-  set name(newName) {
-    if (typeof newName !== 'string') {
-      throw new TypeError('Name must be a string');
+  /* Setters */
+  set name(name) {
+    if (typeof name !== 'string') throw TypeError('Name must be a string');
+    this._name = name;
+  }
+
+  set length(length) {
+    if (typeof length !== 'number') throw TypeError('Length must be a number');
+    this._length = length;
+  }
+
+  set students(students) {
+    if (!Array.isArray(students)) {
+      throw new TypeError('Students must be an array');
     }
-    this._name = newName;
-  }
-
-  set length(newLength) {
-    if (typeof newLength !== 'number') {
-      throw new TypeError('Length must be a number');
-    }
-    this._length = newLength;
-  }
-
-  set students(newStudents) {
-    if (!Array.isArray(newStudents)) {
+    if (students.some((element) => typeof element !== 'string')) {
       throw new TypeError('Students must be an array of strings');
     }
-    this._students = [...newStudents];
+    this._students = students;
   }
-}
-
-const c1 = new HolbertonCourse("ES6", 1, ["Bob", "Jane"]);
-console.log(c1.name);
-
-c1.name = "Python 101";
-console.log(c1);
-
-try {
-  c1.name = 12;
-} catch (err) {
-  console.log(err);
-}
-
-try {
-  const c2 = new HolbertonCourse("ES6", "1", ["Bob", "Jane"]);
-} catch (err) {
-  console.log(err);
 }
